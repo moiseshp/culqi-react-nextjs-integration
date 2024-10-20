@@ -7,9 +7,9 @@
 
 ## Descripción
 
-Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) para implementar la versión [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
+Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) que permite implementar la versión [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
 
-Puedes personalizar los siguientes medios de pagos:
+Puedes habilitar los siguientes medios de pagos en **Culqi Checkout Custom**:
 
 - Tarjetas de Crédito
 - Tarjetas de Débito
@@ -146,6 +146,13 @@ import CulqiPayment from './components/CulqiPayment';
 
 <CulqiPayment amount={1000} currency="PEN" />;
 ```
+
+## ⭐ Apóyame
+
+Si te parece que este proyecto te es útil, ¡deja una estrella en GitHub! Esto ayuda a aumentar la visibilidad y a fomentar la colaboración. Gracias por tu apoyo.
+
+[![Star](https://img.shields.io/github/stars/tu_usuario/tu_repositorio?style=social)](https://github.com/tu_usuario/tu_repositorio/stargazers)
+
 
 ## Licencia
 
