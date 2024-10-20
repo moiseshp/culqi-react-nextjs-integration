@@ -7,16 +7,16 @@
 
 ## Descripción
 
-Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) que permite implementar la versión [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
+Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) que permite implementar la versión de [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
 
-Puedes habilitar los siguientes medios de pagos en **Culqi Checkout Custom**:
+La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes formas de pago:
 
-- Tarjetas de Crédito
-- Tarjetas de Débito
-- Transferencias bancarias
-- Yape, Plin, ... (otras billeteras)
-- Agente
-- Cuotealo
+- Tarjetas de Crédito.
+- Tarjetas de Débito.
+- Transferencias bancarias.
+- Yape, Plin, ... (otras billeteras).
+- Agente.
+- Cuotealo.
 
 ## Integración Culqi (Quickstart)
 
@@ -30,7 +30,7 @@ Sigue los siguientes pasos para integrar **Culqi Checkout Custom** en tu aplicac
 Establece tus llaves pública y privada en una variable de entorno.
 
 ```env
-// .env.local (entorno local)
+# .env.local (entorno local)
 NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
 API_PRIVATE_KEY=tu_secret_key
 ```
