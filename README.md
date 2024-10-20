@@ -7,24 +7,30 @@
 
 ## Descripción
 
-Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) para implementar la versión **Culqi Checkout Custom**.
+Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) para implementar la versión [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
 
-Esta versión permite personalizar la experiencia de pago y está basada en la documentación oficial:  
-[Culqi Checkout Custom - Documentación](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
+Puedes personalizar los siguientes medios de pagos:
 
+- Tarjetas de Crédito
+- Tarjetas de Débito
+- Transferencias bancarias
+- Yape, Plin, ... (otras billeteras)
+- Agente
+- Cuotealo
 
 ## Integración Culqi (Quickstart)
 
 Sigue los siguientes pasos para integrar **Culqi Checkout Custom** en tu aplicación **React** o **NextJS**.
 
-> ⚠️ **Importante:** Debes tener acceso a tus llaves pública y privada los cuales los puedes encontrar en la sección [desarrollo](https://mipanel.culqi.com/development/apikeys) del panel de tu comercio. Si no tienes un comercio registrado primero [Afiliáte aquí](https://afiliate.culqi.com/online/step1).
+> ⚠️ **Importante:** Debes tener acceso a tus llaves pública y privada los cuales los puedes encontrar en la sección [desarrollo](https://mipanel.culqi.com/development/apikeys) del panel de tu comercio. Si no tienes un comercio registrado en [Culqi](https://afiliate.culqi.com/) primero [Afiliáte aquí](https://afiliate.culqi.com/online/step1).
 
 
 ### 1. Configura tus credenciales
 
-Configura tus llaves pública y privada en una variable de entorno. Si estás en un entorno local crea un archivo `.env.local`:
+Establece tus llaves pública y privada en una variable de entorno.
 
 ```env
+// .env.local (entorno local)
 NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
 API_PRIVATE_KEY=tu_secret_key
 ```
@@ -100,7 +106,6 @@ async function procesarPago(token) {
 }
 ```
 
-
 ## Prueba este proyecto en tu entorno local
 
 ### Requisitos
@@ -110,26 +115,27 @@ async function procesarPago(token) {
 - Llaves pública y privada de Culqi.
 
 1. Clona este repositorio:
-    ```bash
-    git clone https://github.com/moiseshp/culqi-react-nextjs-integration.git
-    ```
+```bash
+git clone https://github.com/moiseshp/culqi-react-nextjs-integration.git
+```
 
 2. Instala las dependencias:
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
-3. Configura tus llaves API en un archivo `.env.local`:
-    ```env
-    NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
-    API_PRIVATE_KEY=tu_secret_key
-    ```
+3. Establece tus llaves pública y privada en una variable de entorno.
+
+```env
+// .env.local (entorno local)
+NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
+API_PRIVATE_KEY=tu_secret_key
+```
 
 4. Ejecuta el proyecto:
-    - Para **NextJS**:
-      ```bash
-      npm run dev
-      ```
+```bash
+npm run dev
+```
 
 ## Uso
 
