@@ -151,7 +151,7 @@ import CulqiPayment from './components/CulqiPayment';
 
 Si te parece que este proyecto te es útil, ¡deja una estrella en GitHub! Esto ayuda a aumentar la visibilidad y a fomentar la colaboración. Gracias por tu apoyo.
 
-[![Star](https://img.shields.io/github/stars/tu_usuario/tu_repositorio?style=social)](https://github.com/moiseshp/culqi-react-nextjs-integration)
+[![Star](https://img.shields.io/github/stars/moiseshp/culqi-react-nextjs-integration?style=social)](https://github.com/moiseshp/culqi-react-nextjs-integration)
 
 
 ## Licencia
