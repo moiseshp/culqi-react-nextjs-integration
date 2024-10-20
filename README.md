@@ -30,7 +30,7 @@ Sigue los siguientes pasos para integrar **Culqi Checkout Custom** en tu aplicac
 Establece tus llaves pública y privada en una variable de entorno.
 
 ```env
-# .env.local (entorno local)
+# .env.local
 NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
 API_PRIVATE_KEY=tu_secret_key
 ```
@@ -106,7 +106,7 @@ async function procesarPago(token) {
 }
 ```
 
-## Prueba este proyecto en tu entorno local
+## Prueba este proyecto
 
 ### Requisitos
 
@@ -127,7 +127,7 @@ npm install
 3. Establece tus llaves pública y privada en una variable de entorno.
 
 ```env
-// .env.local (entorno local)
+# .env.local
 NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
 API_PRIVATE_KEY=tu_secret_key
 ```
@@ -151,7 +151,7 @@ import CulqiPayment from './components/CulqiPayment';
 
 Si te parece que este proyecto te es útil, ¡deja una estrella en GitHub! Esto ayuda a aumentar la visibilidad y a fomentar la colaboración. Gracias por tu apoyo.
 
-[![Star](https://img.shields.io/github/stars/tu_usuario/tu_repositorio?style=social)](https://github.com/tu_usuario/tu_repositorio/stargazers)
+[![Star](https://img.shields.io/github/stars/tu_usuario/tu_repositorio?style=social)](https://github.com/moiseshp/culqi-react-nextjs-integration.git)
 
 
 ## Licencia
