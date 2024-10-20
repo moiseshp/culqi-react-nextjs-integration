@@ -2,13 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## ⚠️ Disclaimer
+> ⚠️ **Advertencia:** Este proyecto aún está en desarrollo. ¡Contribuciones son bienvenidas!
 
-Este proyecto está en **desarrollo activo** y aún no está terminado. Algunas características podrían no funcionar correctamente o estar incompletas. Se recomienda no usarlo en producción por el momento.
-
-## Descripción
-
-Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. Ofrece una manera eficiente de gestionar pagos con tarjeta y otras funcionalidades de Culqi.
 
 ## Descripción
 
@@ -20,43 +15,27 @@ Esta versión permite personalizar la experiencia de pago y está basada en la d
 
 ## Requisitos
 
-- Node.js 16+
-- React 18+ o Next.js 13+
-- Cuenta en Culqi con llaves API.
+- Node.js 18.17 o superior.
+- macOS, Windows (including WSL), y Linux están soportados.
+- Llaves pública y privada de Culqi.
 
-## Instalación
+## Integración Culqi (Quickstart)
 
-1. Clona este repositorio:
-    ```bash
-    git clone https://github.com/tu-usuario/culqi-react-nextjs-integration.git
-    ```
+Sigue los siguientes pasos para integrar **Culqi Checkout Custom** en tu aplicación **React** o **NextJS**.
 
-2. Instala las dependencias:
-    ```bash
-    npm install
-    ```
+> ⚠️ **Importante:** Debes tener acceso a tus llaves pública y privada los cuales los puedes encontrar en la sección [desarrollo](https://mipanel.culqi.com/development/apikeys) del panel de tu comercio. Si no tienes un comercio registrado primero [Afiliáte aquí](https://afiliate.culqi.com/online/step1).
 
-3. Configura tus llaves API en un archivo `.env.local`:
-    ```env
-    REACT_APP_CULQI_PUBLIC_KEY=tu_public_key
-    CULQI_SECRET_KEY=tu_secret_key
-    ```
 
-4. Ejecuta el proyecto:
-    - Para **Next.js**:
-      ```bash
-      npm run dev
-      ```
-    - Para **React** (CRA o cualquier otra configuración):
-      ```bash
-      npm start
-      ```
+### 1. Configura tus credenciales
 
-## Integración rápida de Culqi (Quickstart)
+Configura tus llaves pública y privada en una variable de entorno. Si estás en un entorno local crea un archivo `.env.local`:
 
-A continuación se muestra una guía general para integrar **Culqi Checkout Custom** en tu aplicación **React** o **Next.js**.
+```env
+NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
+API_PRIVATE_KEY=tu_secret_key
+```
 
-### 1. Agrega el script de Culqi en tu proyecto
+### 2. Agrega el script de Culqi en tu proyecto
 
 Inserta el siguiente script en el archivo `public/index.html` de tu proyecto React, o en el archivo `_document.js` de tu proyecto Next.js, justo antes del cierre de la etiqueta `<body>`:
 
@@ -126,6 +105,31 @@ async function procesarPago(token) {
     return response.data;
 }
 ```
+
+
+## Prueba este proyecto en tu entorno local
+
+1. Clona este repositorio:
+    ```bash
+    git clone https://github.com/moiseshp/culqi-react-nextjs-integration.git
+    ```
+
+2. Instala las dependencias:
+    ```bash
+    npm install
+    ```
+
+3. Configura tus llaves API en un archivo `.env.local`:
+    ```env
+    NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
+    API_PRIVATE_KEY=tu_secret_key
+    ```
+
+4. Ejecuta el proyecto:
+    - Para **NextJS**:
+      ```bash
+      npm run dev
+      ```
 
 ## Uso
 
