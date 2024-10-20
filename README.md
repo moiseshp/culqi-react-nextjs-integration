@@ -13,12 +13,6 @@ Esta versión permite personalizar la experiencia de pago y está basada en la d
 [Culqi Checkout Custom - Documentación](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
 
 
-## Requisitos
-
-- Node.js 18.17 o superior.
-- macOS, Windows (including WSL), y Linux están soportados.
-- Llaves pública y privada de Culqi.
-
 ## Integración Culqi (Quickstart)
 
 Sigue los siguientes pasos para integrar **Culqi Checkout Custom** en tu aplicación **React** o **NextJS**.
@@ -108,6 +102,12 @@ async function procesarPago(token) {
 
 
 ## Prueba este proyecto en tu entorno local
+
+### Requisitos
+
+- Node.js 18.17 o superior.
+- macOS, Windows (including WSL), y Linux están soportados.
+- Llaves pública y privada de Culqi.
 
 1. Clona este repositorio:
     ```bash
