@@ -1,40 +1,29 @@
 'use client';
-
-import OrderItem from './order-item';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import { memo } from 'react';
+import { type Product } from '@/utils/product';
+import { OrderItem } from './order-item';
 
 type OrderSummaryProps = {
-  products: Product[];
-  totalAmount: number;
-  onProceedToPayment: () => void;
+  items: Product[];
+  children: React.ReactNode;
 };
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({
-  products,
-  totalAmount,
-  onProceedToPayment,
-}) => {
-  return (
-    <div>
-      <div className="mb-6">
-        <ul className="space-y-4">
-          {products.map((product) => (
-            <OrderItem key={product.id} />
+const OrderSummary: React.FC<OrderSummaryProps> = memo(
+  ({ items, children }) => {
+    return (
+      <main className="bg-white rounded-xl shadow-2xl shadow-zinc-300 p-6 space-y-4">
+        <h2 className="text-2xl font-bold text-center">Resumen de pedido</h2>
+        <section className="space-y-2">
+          {items.map((product) => (
+            <OrderItem key={product.name} {...product} />
           ))}
-        </ul>
-      </div>
-      <div className="flex justify-between font-semibold text-lg border-t border-gray-300 pt-4">
-        <span>Total:</span>
-        <span>S/ {totalAmount.toFixed(2)}</span>
-      </div>
-    </div>
-  );
-};
+        </section>
+        {children}
+      </main>
+    );
+  },
+);
 
-export default OrderSummary;
+OrderSummary.displayName = 'OrderSummary';
+
+export { OrderSummary };
