@@ -7,7 +7,7 @@
 
 ## Descripción
 
-Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **Next.js**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) que permite implementar la versión de [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
+Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **NextJS**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) que permite implementar la versión de [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
 
 La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes formas de pago:
 
@@ -47,38 +47,20 @@ Inserta el siguiente script en el archivo `public/index.html` de tu proyecto Rea
 En el componente de tu aplicación, agrega un botón que iniciará el proceso de pago cuando el usuario haga clic:
 
 ```js
-<button onClick={openCulqiCheckout}>Pagar con Culqi</button>
 ```
 
 ### 3. Configura y abre el Checkout
 Dentro de tu componente, configura la función openCulqiCheckout para inicializar el Checkout de Culqi:
 
 ```jsx
-function openCulqiCheckout() {
-    Culqi.settings({
-        title: 'Tu tienda',
-        currency: 'PEN',
-        description: 'Producto de ejemplo',
-        amount: 1000  // En céntimos (por ejemplo, S/.10.00)
-    });
 
-    Culqi.open();
-}
 ```
 
 ### 4. Gestiona la respuesta del pago
-Asegúrate de tener configurado el callback onCulqiEvent para procesar la respuesta de Culqi:
+Asegúrate de tener configurado el callback para procesar la respuesta de Culqi:
 
 ```jsx
-window.Culqi = function() {
-    if (Culqi.token) {
-        const token = Culqi.token.id;
-        // Aquí envías el token a tu servidor para procesar el pago
-        console.log('Token recibido:', token);
-    } else {
-        console.log('Error:', Culqi.error);
-    }
-};
+
 ```
 
 ### 5. Procesa el pago en el servidor
@@ -87,23 +69,7 @@ Debes enviar el token generado por Culqi a tu servidor backend para completar el
 Ejemplo de integración con Node.js:
 
 ```js
-const axios = require('axios');
 
-async function procesarPago(token) {
-    const response = await axios.post('https://api.culqi.com/v2/charges', {
-        amount: 1000,
-        currency_code: 'PEN',
-        email: 'correo@ejemplo.com',
-        source_id: token
-    }, {
-        headers: {
-            'Authorization': `Bearer ${process.env.CULQI_SECRET_KEY}`,
-            'Content-Type': 'application/json'
-        }
-    });
-    
-    return response.data;
-}
 ```
 
 ## Prueba este proyecto
@@ -135,16 +101,6 @@ API_PRIVATE_KEY=tu_secret_key
 4. Ejecuta el proyecto:
 ```bash
 npm run dev
-```
-
-## Uso
-
-El componente Culqi se puede usar en aplicaciones React o Next.js:
-
-```js
-import CulqiPayment from './components/CulqiPayment';
-
-<CulqiPayment amount={1000} currency="PEN" />;
 ```
 
 ## ⭐ Apóyame
