@@ -1,6 +1,6 @@
 export interface CulqiConfig {
   settings: Settings;
-  client: Client;
+  client?: Client;
   options: Options;
   appearance: Appearance;
 }
@@ -19,7 +19,7 @@ export interface PaymentMethods {
  * - `title`: Title for the settings.
  * - `currency`: Currency code (e.g., USD, PEN).
  * - `amount`: Mandatory when using Yape as the payment method.
- * - `order`: Mandatory for PagoEfectivo or similar payment methods.
+ * - `order`: Mandatory for PagoEfectivo or similar payment methods. https://docs.culqi.com/es/documentacion/pagos-online/ordenes-de-pago/resumen/
  * - `xculqirsaid`: RSA ID, typically a public key identifier.
  * - `rsapublickey`: RSA public key used for encryption.
  */
@@ -27,13 +27,13 @@ interface Settings {
   title?: string;
   currency?: string;
   amount?: number;
-  order?: string;
+  order?: string | number;
   xculqirsaid?: string;
   rsapublickey?: string;
 }
 
 interface Client {
-  name: string;
+  name?: string;
   email: string;
 }
 

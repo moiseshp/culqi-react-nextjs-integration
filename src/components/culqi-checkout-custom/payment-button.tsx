@@ -3,22 +3,22 @@
  * https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/
  */
 import { useEffect, useState } from 'react';
-// import { Button } from '@/components/ui/button';
 import { getConfig } from './config';
 import { Culqi, CulqiConfig } from './types';
 import { loadScript } from './load-script';
+import { Button } from '@/components/button';
 
-const CULQI_URL = 'https://js.culqi.com/checkout-js';
-const API_PUBLIC_KEY = process.env.NEXT_PUBLIC_API_PUBLIC_KEY;
+export const CULQI_CHECKOUT_SCRIPT = 'https://js.culqi.com/checkout-js';
+export const API_PUBLIC_KEY = process.env.NEXT_PUBLIC_API_PUBLIC_KEY;
 
-type CulqiButtonProps = {
-  onProcessPaymentCharge: (token: string) => void;
+type PaymentButtonProps = {
+  onPaymentAction: (token: string) => void;
   config: Partial<CulqiConfig>;
   children: React.ReactNode;
 };
 
-export const CulqiButton: React.FC<CulqiButtonProps> = ({
-  onProcessPaymentCharge,
+export const PaymentButton: React.FC<PaymentButtonProps> = ({
+  onPaymentAction,
   config,
   children,
 }) => {
@@ -27,7 +27,7 @@ export const CulqiButton: React.FC<CulqiButtonProps> = ({
   const initializeConfig = getConfig({ settings, client });
 
   useEffect(() => {
-    const cleanupScript = loadScript(CULQI_URL, () => {
+    const cleanupScript = loadScript(CULQI_CHECKOUT_SCRIPT, () => {
       if (!window.CulqiCheckout) return;
       const culqiCheckout: Culqi = new window.CulqiCheckout(
         API_PUBLIC_KEY,
@@ -39,7 +39,7 @@ export const CulqiButton: React.FC<CulqiButtonProps> = ({
         if (culqiCheckout.token) {
           const token = culqiCheckout.token.id;
           culqiCheckout.close();
-          onProcessPaymentCharge(token);
+          onPaymentAction(token);
           return;
         }
         if (culqiCheckout.order) {
@@ -56,7 +56,15 @@ export const CulqiButton: React.FC<CulqiButtonProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!culqi) return;
-
-  return <button onClick={() => culqi.open()}>{children}</button>;
+  return (
+    <Button
+      isLoading={!culqi}
+      onClick={() => {
+        if (!culqi) return;
+        culqi.open();
+      }}
+    >
+      {children}
+    </Button>
+  );
 };

@@ -7,8 +7,8 @@ export function getConfig({
   appearance,
 }: Partial<CulqiConfig>): Partial<CulqiConfig> {
   const paymentMethods: PaymentMethods = {
-    yape: true,
     tarjeta: true,
+    yape: true,
     billetera: true,
     bancaMovil: true,
     agente: true,
@@ -17,7 +17,8 @@ export function getConfig({
 
   return {
     settings: {
-      title: 'Virtual Box S.A.C',
+      title: 'Hola Mundo S.A.C',
+      currency: 'PEN', // Formato ISO 4217
       ...settings,
     },
     client,
@@ -31,20 +32,9 @@ export function getConfig({
     },
     appearance: {
       theme: 'default',
-      buttonCardPayText: 'Regalar el monto de',
+      buttonCardPayText: 'Total a pagar',
       menuType: 'sliderTop',
-      logo: 'http://www.childrensociety.ms/wp-content/uploads/2019/11/MCS-Logo-2019-no-text.jpg',
-      rules: {
-        '.Culqi-ToolBanner': {
-          // backgroundColor: 'red',
-        },
-        '.Culqi-Button': {
-          marginBottom: '0',
-        },
-        '.Culqi-Main-Container aside > div > div': {
-          padding: '0',
-        },
-      },
+      logo: 'https://img.freepik.com/premium-vector/hello-world-icon-white-greeting-text-orange-bubble-speech_101884-1663.jpg',
       ...appearance,
     },
   };

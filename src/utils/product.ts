@@ -16,14 +16,14 @@ export const products: Product[] = [
   {
     name: 'Mochila de Viaje',
     description: 'Resistente al agua.',
-    price: 39.99,
+    price: 45.49,
     image:
       'https://cdn.pixabay.com/photo/2018/03/24/11/15/travel-bag-3256390_1280.jpg',
   },
   {
     name: 'Auriculares Inalámbricos',
     description: 'Inalámbricos.',
-    price: 79.99,
+    price: 118.99,
     image:
       'https://cdn.pixabay.com/photo/2018/09/17/14/27/headphones-3683983_1280.jpg',
   },
