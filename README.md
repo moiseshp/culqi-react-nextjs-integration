@@ -3,11 +3,9 @@
 ![Culqi Vercel Page](https://culqi-react-nextjs.vercel.app/screenshot-1.png)
 https://culqi-react-nextjs.vercel.app/screenshot-1.png
 
-Puedes revisar esta integración en [Culqi React NextJS Integration](https://culqi-react-nextjs.vercel.app/)
+Puedes revisar esta integración en [Culqi React NextJS Integration](https://culqi-react-nextjs.vercel.app/) gracias a [Vercel](https://vercel.com)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
-> ⚠️ **Advertencia:** Este proyecto aún está en desarrollo. ¡Contribuciones son bienvenidas!
 
 ## Descripción
 
@@ -15,13 +13,13 @@ Este proyecto proporciona una integración rápida y sencilla del sistema de pag
 
 La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes formas de pago:
 
-- Tarjetas de Crédito ✅
-- Tarjetas de Débito ✅
-- Yape ✅
-- PLIN y otras billeteras - WIP 🚧
-- Transferencias bancarias - WIP 🚧
-- Agente - WIP 🚧
-- Cuotealo - WIP 🚧
+- [x] Tarjetas de Crédito
+- [x] Tarjetas de Débito
+- [x] Yape
+- [ ] PLIN y otras billeteras - WIP 🚧
+- [ ] Transferencias bancarias - WIP 🚧
+- [ ] Agente - WIP 🚧
+- [ ]Cuotealo - WIP 🚧
 
 ## Integración Culqi (Quickstart)
 
@@ -210,5 +208,3 @@ Por otro lado, si te parece que este proyecto te es útil, ¡deja una estrella e
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT.
-
-This site was built with [NextJS](https://nextjs.org/) and hosted on [Vercel](https://vercel.com)
