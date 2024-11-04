@@ -1,7 +1,6 @@
 # Culqi React & Next.js Integration
 
 ![Culqi Vercel Page](https://culqi-react-nextjs.vercel.app/screenshot-1.png)
-https://culqi-react-nextjs.vercel.app/screenshot-1.png
 
 Puedes revisar esta integración en [Culqi React NextJS Integration](https://culqi-react-nextjs.vercel.app/) gracias a [Vercel](https://vercel.com)
 
@@ -19,7 +18,7 @@ La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes for
 - [ ] PLIN y otras billeteras - WIP 🚧
 - [ ] Transferencias bancarias - WIP 🚧
 - [ ] Agente - WIP 🚧
-- [ ]Cuotealo - WIP 🚧
+- [ ] Cuotealo - WIP 🚧
 
 ## Integración Culqi (Quickstart)
 
