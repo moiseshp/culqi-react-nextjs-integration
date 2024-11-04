@@ -97,13 +97,29 @@ export default function Checkout() {
 
 Screenshot del Checkout de Culqi:
 
-![Culqi Checkout](https://culqi-react-nextjs.vercel.app/screenshot-2.png)
+![Culqi Checkout](https://culqi-react-nextjs.vercel.app/screenshot-3.png)
 
 ### Paso 4. Gestiona la respuesta de Culqi
 
 Gestiona la respuesta del modal de Culqi hacia tu backend para procesar el cargo. Culqi devuelve un `string` que es un **ID Tokenizado** `token` el cual debes procesar únicamente de servidor a servidor mediante el API de Culqi.
 
+Puedes consultas la [documentación oficial](https://apidocs.culqi.com/#tag/Cargos/Objeto-cargo) para más información sobre cómo estructurar los cargos entre Culqi y tu backend:
+
 ```jsx
+const handlePaymentAction = async (token: string) => {
+  /**
+   * Aquí puedes implementar una request hacia tu backend enviado la siguiente información:
+   * amount: number
+   * currency_code: string ISO
+   * source_id: ID tokenizado (token que devuelve el modal de Culqi)
+   */
+};
+```
+
+El siguiente código es un ejemplo con **NextJS + Server Actions** (versión 13 o superior)
+
+```jsx
+// page.tsx
 const handlePaymentAction = async (token: string) => {
   const response = await processPaymentAction({
     amount: config.settings?.amount as number,
@@ -113,14 +129,9 @@ const handlePaymentAction = async (token: string) => {
 };
 ```
 
-Si estás utilizando NextJS (versión 13 o superior), puedes implementar esta funcionalidad en un **Server Action** para manejar de forma segura la transacción en el servidor. Consulta la documentación oficial para más información sobre cómo estructurar estos handlers de la siguiente manera:
-
 ```js
+// actions.ts
 'use server';
-/**
- * Revisa la documentación para gestionar los cargos:
- * https://apidocs.culqi.com/#tag/Cargos/Objeto-cargo
- */
 const API_URL = 'https://api.culqi.com/v2/charges';
 
 interface PaymentCharge {

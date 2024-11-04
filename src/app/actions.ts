@@ -1,8 +1,4 @@
 'use server';
-/**
- * Revisa la documentación para gestionar los cargos:
- * https://apidocs.culqi.com/#tag/Cargos/Objeto-cargo
- */
 const API_URL = 'https://api.culqi.com/v2/charges';
 
 interface PaymentCharge {
