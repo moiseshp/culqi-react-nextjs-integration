@@ -4,7 +4,6 @@
 
 > ⚠️ **Advertencia:** Este proyecto aún está en desarrollo. ¡Contribuciones son bienvenidas!
 
-
 ## Descripción
 
 Este proyecto proporciona una integración rápida y sencilla del sistema de pagos de [Culqi](https://culqi.com) en aplicaciones construidas con **React** o **NextJS**. No es necesario instalar ninguna librería adicional. La integración utiliza el script oficial de Culqi: [https://js.culqi.com/checkout-js](https://js.culqi.com/checkout-js) que permite implementar la versión de [Culqi Checkout Custom](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/).
@@ -14,7 +13,7 @@ La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes for
 - Tarjetas de Crédito.
 - Tarjetas de Débito.
 - Transferencias bancarias.
-- Yape, Plin, ... (otras billeteras).
+- Yape, Plin, ... (+ otras billeteras).
 - Agente.
 - Cuotealo.
 
@@ -23,7 +22,6 @@ La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes for
 Sigue los siguientes pasos para integrar **Culqi Checkout Custom** en tu aplicación **React** o **NextJS**.
 
 > ⚠️ **Importante:** Debes tener acceso a tus llaves pública y privada los cuales los puedes encontrar en la sección [desarrollo](https://mipanel.culqi.com/development/apikeys) del panel de tu comercio. Si no tienes un comercio registrado en [Culqi](https://afiliate.culqi.com/) primero [Afiliáte aquí](https://afiliate.culqi.com/online/step1).
-
 
 ### 1. Configura tus credenciales
 
@@ -35,42 +33,68 @@ NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
 API_PRIVATE_KEY=tu_secret_key
 ```
 
-### 2. Agrega el script de Culqi en tu proyecto
+### 2. Copia la carpeta de **culqi-checkout-custom** a tu proyecto
 
-Inserta el siguiente script en el archivo `public/index.html` de tu proyecto React, o en el archivo `_document.js` de tu proyecto Next.js, justo antes del cierre de la etiqueta `<body>`:
+Esta carpeta contiene el componente de Botón de Pago y los archivos necesarios para la integración con Culqi:
 
-```html
-<script src="https://js.culqi.com/checkout/v4/checkout.js"></script>
+```bash
+./my-project
+  ./culqi-checkout-custom
+    ./__tests__           # Pruebas unitarias del módulo
+    - config.ts           # Configuración de Culqi y comercio
+    - load-script.ts      # Función para cargar el script de Culqi
+    - payment-button.tsx  # Componente del botón de pago
+    - types.ts            # Definición de interfaces y tipos
+  ...
 ```
 
-### 2. Crea tu botón de pago
-En el componente de tu aplicación, agrega un botón que iniciará el proceso de pago cuando el usuario haga clic:
+Estructura de archivos de la carpeta **`culqi-checkout-custom`:**
 
-```js
-```
+- **`config.ts`**: Contiene la configuración por defecto para la integración de Culqi y los datos de tu comercio.
+- **`load-script.ts`**: Función que carga dinámicamente el script de Culqi en el frontend.
+- **`payment-button.tsx`**: Componente React para el botón de pago, que utiliza la configuración y el script de Culqi.
+- **`types.ts`**: Contiene las interfaces y tipos para tipar los datos de manera segura.
 
-### 3. Configura y abre el Checkout
-Dentro de tu componente, configura la función openCulqiCheckout para inicializar el Checkout de Culqi:
+### 3. Agrega el componente de botón de Pago
 
 ```jsx
+<PaymentButton onPaymentAction={...} config={..}>
+  Pagar S/ 320.00
+</PaymentButton>
+```
 
+Código extendido con la configuración que el botón de pago necesita:
+
+```jsx
+import { PaymentButton } from './culqi-checkout-custom/payment-button';
+import { type CulqiConfig } from './culqi-checkout-custom/types';
+
+function Checkout() {
+  const config: Partial<CulqiConfig> = {
+    settings: {
+      amount: totalPrice * 100,
+    },
+    ...
+  };
+
+  const handlePaymentAction = () => {};
+
+  return (
+    <>
+      ...
+      <PaymentButton onPaymentAction={handlePaymentAction} config={config}>
+        Pagar S/ {totalPrice}
+      </PaymentButton>
+      ...
+    </>
+  )
+}
+...
 ```
 
 ### 4. Gestiona la respuesta del pago
-Asegúrate de tener configurado el callback para procesar la respuesta de Culqi:
-
-```jsx
-
-```
 
 ### 5. Procesa el pago en el servidor
-Debes enviar el token generado por Culqi a tu servidor backend para completar el pago. El servidor será responsable de realizar la petición a la API de Culqi con el token recibido.
-
-Ejemplo de integración con Node.js:
-
-```js
-
-```
 
 ## Prueba este proyecto
 
@@ -81,11 +105,13 @@ Ejemplo de integración con Node.js:
 - Llaves pública y privada de Culqi.
 
 1. Clona este repositorio:
+
 ```bash
 git clone https://github.com/moiseshp/culqi-react-nextjs-integration.git
 ```
 
 2. Instala las dependencias:
+
 ```bash
 npm install
 ```
@@ -99,6 +125,7 @@ API_PRIVATE_KEY=tu_secret_key
 ```
 
 4. Ejecuta el proyecto:
+
 ```bash
 npm run dev
 ```
@@ -108,7 +135,6 @@ npm run dev
 Si te parece que este proyecto te es útil, ¡deja una estrella en GitHub! Esto ayuda a aumentar la visibilidad y a fomentar la colaboración. Gracias por tu apoyo.
 
 [![Star](https://img.shields.io/github/stars/moiseshp/culqi-react-nextjs-integration?style=social)](https://github.com/moiseshp/culqi-react-nextjs-integration)
-
 
 ## Licencia
 
