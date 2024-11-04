@@ -1,5 +1,7 @@
 # Culqi React & Next.js Integration
 
+![Culqi Vercel Page](https://culqi-react-nextjs.vercel.app/screenshot-1.png)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > ⚠️ **Advertencia:** Este proyecto aún está en desarrollo. ¡Contribuciones son bienvenidas!
@@ -10,12 +12,12 @@ Este proyecto proporciona una integración rápida y sencilla del sistema de pag
 
 La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes formas de pago:
 
-- Tarjetas de Crédito.
-- Tarjetas de Débito.
-- Transferencias bancarias.
-- Yape, Plin, ... (+ otras billeteras).
-- Agente.
-- Cuotealo.
+- Tarjetas de Crédito ✅
+- Tarjetas de Débito ✅
+- Yape, Plin, ... (+ otras billeteras) ✅
+- Transferencias bancarias - WIP 🚧
+- Agente - WIP 🚧
+- Cuotealo - WIP 🚧
 
 ## Integración Culqi (Quickstart)
 
@@ -33,43 +35,44 @@ NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
 API_PRIVATE_KEY=tu_secret_key
 ```
 
-### 2. Copia la carpeta de **culqi-checkout-custom** a tu proyecto
+### 2. Copia la carpeta ./culqi-checkout-custom a tu proyecto
 
-Esta carpeta contiene el componente de Botón de Pago y los archivos necesarios para la integración con Culqi:
+Esta es la estructura y descripción de los archivos:
 
 ```bash
-./my-project
-  ./culqi-checkout-custom
-    ./__tests__           # Pruebas unitarias del módulo
-    - config.ts           # Configuración de Culqi y comercio
-    - load-script.ts      # Función para cargar el script de Culqi
-    - payment-button.tsx  # Componente del botón de pago
-    - types.ts            # Definición de interfaces y tipos
-  ...
+your-project
+├── culqi-checkout-custom
+│   ├── __tests__           # Pruebas unitarias del módulo
+│   ├── config.ts           # Configuración de Culqi y comercio
+│   ├── load-script.ts      # Función para cargar el script de Culqi
+│   ├── payment-button.tsx  # Componente de botón de pago 😍
+│   └── types.ts            # Definición de interfaces y tipos
 ```
 
-Estructura de archivos de la carpeta **`culqi-checkout-custom`:**
+Estructura de archivos de la carpeta `culqi-checkout-custom`:
 
-- **`config.ts`**: Contiene la configuración por defecto para la integración de Culqi y los datos de tu comercio.
+- **`config.ts`**: Configuración por defecto para la integración de Culqi y los datos de tu comercio.
 - **`load-script.ts`**: Función que carga dinámicamente el script de Culqi en el frontend.
-- **`payment-button.tsx`**: Componente React para el botón de pago, que utiliza la configuración y el script de Culqi.
+- **`payment-button.tsx`**: Componente botón de pago configurado para utilizar el script de Culqi.
 - **`types.ts`**: Contiene las interfaces y tipos para tipar los datos de manera segura.
 
-### 3. Agrega el componente de botón de Pago
+### 3. Agrega el componente de botón de Pago a tu vista
 
-```jsx
-<PaymentButton onPaymentAction={...} config={..}>
-  Pagar S/ 320.00
-</PaymentButton>
-```
+Importa el componente `<PaymentButton />`. Considera que es necesario pasarle los siguientes parámetros como `props`:
 
-Código extendido con la configuración que el botón de pago necesita:
+| Props           | Description                                                                                                                                                                                                       |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onPaymentAction | Callback para gestionar con el proceso del pago.                                                                                                                                                                  |
+| config          | Objeto de tipo `CulqiConfig`. Revisa la documentación de [Culqi](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/#paso-2-configura-el-custom-culqi-checkout-para-tokenizar-la-tarjeta). |
+
+Ejemplo de component en **React** que importa el **Botón de Pago**:
 
 ```jsx
 import { PaymentButton } from './culqi-checkout-custom/payment-button';
 import { type CulqiConfig } from './culqi-checkout-custom/types';
 
-function Checkout() {
+export default function Checkout() {
+  const totalPrice = 184.47;
   const config: Partial<CulqiConfig> = {
     settings: {
       amount: totalPrice * 100,
@@ -85,16 +88,18 @@ function Checkout() {
       <PaymentButton onPaymentAction={handlePaymentAction} config={config}>
         Pagar S/ {totalPrice}
       </PaymentButton>
-      ...
     </>
   )
 }
-...
 ```
 
-### 4. Gestiona la respuesta del pago
+Screenshot del Checkout de Culqi:
 
-### 5. Procesa el pago en el servidor
+![Culqi Checkout](https://culqi-react-nextjs.vercel.app/screenshot-2.png)
+
+### 4. Gestiona la respuesta de Culqi
+
+### 5. Procesa la transacción (Sólo posible de lado del Servidor)
 
 ## Prueba este proyecto
 
@@ -139,3 +144,5 @@ Si te parece que este proyecto te es útil, ¡deja una estrella en GitHub! Esto 
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT.
+
+This site was built with [NextJS](https://nextjs.org/) and hosted on [Vercel](https://vercel.com)
