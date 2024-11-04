@@ -1,6 +1,9 @@
 # Culqi React & Next.js Integration
 
 ![Culqi Vercel Page](https://culqi-react-nextjs.vercel.app/screenshot-1.png)
+https://culqi-react-nextjs.vercel.app/screenshot-1.png
+
+Puedes revisar esta integración en [Culqi React NextJS Integration](https://culqi-react-nextjs.vercel.app/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -14,7 +17,8 @@ La pasarela de **Culqi Checkout Custom** te permite habilitar los siguientes for
 
 - Tarjetas de Crédito ✅
 - Tarjetas de Débito ✅
-- Yape, Plin, ... (+ otras billeteras) ✅
+- Yape ✅
+- PLIN y otras billeteras - WIP 🚧
 - Transferencias bancarias - WIP 🚧
 - Agente - WIP 🚧
 - Cuotealo - WIP 🚧
@@ -25,7 +29,7 @@ Sigue los siguientes pasos para integrar **Culqi Checkout Custom** en tu aplicac
 
 > ⚠️ **Importante:** Debes tener acceso a tus llaves pública y privada los cuales los puedes encontrar en la sección [desarrollo](https://mipanel.culqi.com/development/apikeys) del panel de tu comercio. Si no tienes un comercio registrado en [Culqi](https://afiliate.culqi.com/) primero [Afiliáte aquí](https://afiliate.culqi.com/online/step1).
 
-### 1. Configura tus credenciales
+### Paso 1. Configura tus credenciales
 
 Establece tus llaves pública y privada en una variable de entorno.
 
@@ -35,12 +39,12 @@ NEXT_PUBLIC_API_PUBLIC_KEY=tu_public_key
 API_PRIVATE_KEY=tu_secret_key
 ```
 
-### 2. Copia la carpeta ./culqi-checkout-custom a tu proyecto
+### Paso 2. Copia la carpeta ./culqi-checkout-custom a tu proyecto
 
 Esta es la estructura y descripción de los archivos:
 
 ```bash
-your-project
+/your-project
 ├── culqi-checkout-custom
 │   ├── __tests__           # Pruebas unitarias del módulo
 │   ├── config.ts           # Configuración de Culqi y comercio
@@ -49,23 +53,23 @@ your-project
 │   └── types.ts            # Definición de interfaces y tipos
 ```
 
-Estructura de archivos de la carpeta `culqi-checkout-custom`:
+Detalle de la estructura de archivos:
 
 - **`config.ts`**: Configuración por defecto para la integración de Culqi y los datos de tu comercio.
 - **`load-script.ts`**: Función que carga dinámicamente el script de Culqi en el frontend.
 - **`payment-button.tsx`**: Componente botón de pago configurado para utilizar el script de Culqi.
 - **`types.ts`**: Contiene las interfaces y tipos para tipar los datos de manera segura.
 
-### 3. Agrega el componente de botón de Pago a tu vista
+### Paso 3. Agrega el componente de Botón de Pago a tu vista
 
-Importa el componente `<PaymentButton />`. Considera que es necesario pasarle los siguientes parámetros como `props`:
+Importa el componente `<PaymentButton />`. Es necesario pasarle los siguientes `props`:
 
 | Props           | Description                                                                                                                                                                                                       |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| onPaymentAction | Callback para gestionar con el proceso del pago.                                                                                                                                                                  |
+| onPaymentAction | Callback para gestionar el proceso del pago.                                                                                                                                                                      |
 | config          | Objeto de tipo `CulqiConfig`. Revisa la documentación de [Culqi](https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout-custom/#paso-2-configura-el-custom-culqi-checkout-para-tokenizar-la-tarjeta). |
 
-Ejemplo de component en **React** que importa el **Botón de Pago**:
+Código de ejemplo en un componente **React** que importa el **Botón de Pago**:
 
 ```jsx
 import { PaymentButton } from './culqi-checkout-custom/payment-button';
@@ -77,19 +81,17 @@ export default function Checkout() {
     settings: {
       amount: totalPrice * 100,
     },
-    ...
   };
 
   const handlePaymentAction = () => {};
 
   return (
     <>
-      ...
       <PaymentButton onPaymentAction={handlePaymentAction} config={config}>
         Pagar S/ {totalPrice}
       </PaymentButton>
     </>
-  )
+  );
 }
 ```
 
@@ -97,9 +99,60 @@ Screenshot del Checkout de Culqi:
 
 ![Culqi Checkout](https://culqi-react-nextjs.vercel.app/screenshot-2.png)
 
-### 4. Gestiona la respuesta de Culqi
+### Paso 4. Gestiona la respuesta de Culqi
 
-### 5. Procesa la transacción (Sólo posible de lado del Servidor)
+Gestiona la respuesta del modal de Culqi hacia tu backend para procesar el cargo. Culqi devuelve un `string` que es un **ID Tokenizado** `token` el cual debes procesar únicamente de servidor a servidor mediante el API de Culqi.
+
+```jsx
+const handlePaymentAction = async (token: string) => {
+  const response = await processPaymentAction({
+    amount: config.settings?.amount as number,
+    currencyCode: config.settings?.currency as string,
+    sourceId: token,
+  });
+};
+```
+
+Si estás utilizando NextJS (versión 13 o superior), puedes implementar esta funcionalidad en un **Server Action** para manejar de forma segura la transacción en el servidor. Consulta la documentación oficial para más información sobre cómo estructurar estos handlers de la siguiente manera:
+
+```js
+'use server';
+/**
+ * Revisa la documentación para gestionar los cargos:
+ * https://apidocs.culqi.com/#tag/Cargos/Objeto-cargo
+ */
+const API_URL = 'https://api.culqi.com/v2/charges';
+
+interface PaymentCharge {
+  amount: number;
+  currencyCode: string;
+  sourceId: string;
+}
+
+export async function processPaymentAction(data: PaymentCharge) {
+  try {
+    await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.API_PRIVATE_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...data,
+        currency_code: data.currencyCode,
+        source_id: data.sourceId,
+      }),
+    });
+    return {
+      message: 'Success payment',
+    };
+  } catch {
+    throw new Error('error to process paymento with processPaymentAction');
+  }
+}
+```
+
+Según la respuesta recibida desde processPaymentAction o el servicio externo que decidas implementar puedes personalizar los mensajes de éxito o error para notificar al usuario sobre el estado de la transacción. Esto permite una mejor experiencia de usuario, adaptando la respuesta de la API de Culqi a tu flujo de negocio.
 
 ## Prueba este proyecto
 
@@ -135,9 +188,11 @@ API_PRIVATE_KEY=tu_secret_key
 npm run dev
 ```
 
-## ⭐ Apóyame
+## Contribuciones son Bienvenidas 🎉
 
-Si te parece que este proyecto te es útil, ¡deja una estrella en GitHub! Esto ayuda a aumentar la visibilidad y a fomentar la colaboración. Gracias por tu apoyo.
+¡Gracias por tu interés en colaborar con este proyecto! Me encataría contar con tu ayuda para mejorar y expandir este proyecto para la comunidad. Aceptamos contribuciones de todo tipo, desde mejoras en la documentación hasta nuevas funcionalidades y correcciones de errores.
+
+Por otro lado, si te parece que este proyecto te es útil, ¡deja una estrella en GitHub! Esto ayuda a aumentar la visibilidad y a fomentar la colaboración. Gracias por tu apoyo.
 
 [![Star](https://img.shields.io/github/stars/moiseshp/culqi-react-nextjs-integration?style=social)](https://github.com/moiseshp/culqi-react-nextjs-integration)
 

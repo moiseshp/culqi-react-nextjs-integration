@@ -6,19 +6,29 @@ import { Signature } from '@/components/signature';
 import { Title } from '@/components/title';
 import { getTotalPrice } from '@/utils/get-total-price';
 import { products } from '@/utils/product';
+import { processPaymentAction } from './actions';
 
 export default function Home() {
   const totalPrice = getTotalPrice(products);
   const config: Partial<CulqiConfig> = {
-    client: {
-      email: 'hello@world.com',
-    },
     settings: {
+      currency: 'PEN',
       amount: totalPrice * 100,
     },
   };
 
-  const handlePaymentAction = () => {};
+  const handlePaymentAction = async (token: string) => {
+    /**
+     * Gestión de la respuesta hacia el backend para procesar el pago.
+     */
+    const response = await processPaymentAction({
+      amount: config.settings?.amount as number,
+      currencyCode: config.settings?.currency as string,
+      sourceId: token,
+    });
+
+    console.info({ response, token });
+  };
 
   return (
     <div className="max-w-96 m-auto">
