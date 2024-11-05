@@ -1,3 +1,4 @@
+import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -14,6 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <GoogleTagManager gtmId="G-8PHET3RZ95" />
       <body className="bg-zinc-50">{children}</body>
     </html>
   );
